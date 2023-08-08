@@ -35,12 +35,25 @@ const MORSE_TABLE = {
     '---..':  '8',
     '----.':  '9',
     '-----':  '0',
+    '**********': ' ',
 };
 
 function decode(expr) {
-    // write your solution here
+    const secretChunks = expr.match(/.{10}/g);
+
+    const secretMorse = secretChunks.map(secretChunk => {
+        const secretMorseChunk = secretChunk
+            .replace(/10/g, '.')
+            .replace(/11/g, '-')
+            .replace(/0/g, '');
+        return MORSE_TABLE[secretMorseChunk];
+    });
+
+    const secretMessage = secretMorse.join('');
+
+    return secretMessage;
 }
 
 module.exports = {
     decode
-}
+};
